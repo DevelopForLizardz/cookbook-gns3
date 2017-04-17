@@ -25,5 +25,3 @@
 # THE SOFTWARE.
 
 
-package 'nano' do
-end

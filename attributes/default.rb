@@ -23,3 +23,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
+
+node['gns3']['data_dir'] = '/home/gns3/GNS3'
+node['gsn3']['config_dir'] = '/home/gns3/.config/GNS3'
+node['gns3']['projects_dir'] = '#{node[:gns3][:data_dir]}/projects'
+node['gns3']['images_dir'] = '#{node[:gns3][:data_dir]}/images'
