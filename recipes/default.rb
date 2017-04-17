@@ -1,5 +1,5 @@
 #
-# Cookbook:: cookbook-gns3
+# Cookbook:: gns3
 # Recipe:: default
 #
 # The MIT License (MIT)
@@ -24,3 +24,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+
+package 'nano' do
+end
