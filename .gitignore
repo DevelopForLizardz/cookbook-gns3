@@ -16,6 +16,9 @@ bin/*
 .kitchen/
 .kitchen.local.yml
 
+# chef automate
+.delivery
+
 # Chef
 Berksfile.lock
 .zero-knife.rb
