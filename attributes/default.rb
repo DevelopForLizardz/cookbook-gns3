@@ -24,7 +24,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-node['gns3']['data_dir'] = '/home/gns3/GNS3'
-node['gsn3']['config_dir'] = '/home/gns3/.config/GNS3'
+node['gns3']['gns3_user'] = 'gns3'
+node['gns3']['data_dir'] = '/home/#{node[:gns3][:gns3_user]}/GNS3'
+node['gsn3']['config_dir'] = '/home/#{node[:gns3][:gns3_user]}/.config/GNS3'
 node['gns3']['projects_dir'] = '#{node[:gns3][:data_dir]}/projects'
 node['gns3']['images_dir'] = '#{node[:gns3][:data_dir]}/images'
+node['gns3']['iou'] = true
+node['gns3']['virtualbox'] = false
+node['gns3']['qemu'] = true
+node['gns3']['vmware'] = false
