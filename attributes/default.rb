@@ -24,13 +24,26 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+
+# Packages
+node['gns3']['packages'] = {
+	'server' => %w(gns3_server),
+	'client' => %w(gns3_gui)
+}
+
 # Paths
 node['gns3']['paths'] = {
 	'gns3_dir' => '/home/gns3/GNS3',
 	'projects_dir' => '#{node[:gns3][:paths][:gns3_dir]}/projects',
 	'images_dir' => '#{node[:gns3][:paths][:gns3_dir]}/images',
 	'config_dir' => '/home/gns3/.config/GNS3',
-	'server_config' => 'FILE:#{node[:gns3][:paths][:config_dir]}/gns3_server.conf'
+	'server_config' => 'FILE:#{node[:gns3][:paths][:config_dir]}/gns3_server.conf',
+	'vpcs' => '/usr/local/bin/vpcs',
+	'dynamips' => '/usr/local/bin/dynamips',
+	'iouyap' => '/usr/local/bin/iouyap',
+	'iourc' => '/home/gns3/.iourc',
+	'vboxmanage' => '/usr/local/bin/VBoxManage',
+	'vmrun' => '/usr/bin/local/vmrun'
 }
 
 # Server configuration
@@ -47,12 +60,28 @@ node['gns3']['server'] = {
 	'user' => 'bob',
 	'password' => 'alice'
 }
-node['gns3']['gns3_user'] = 'gns3'
-node['gns3']['data_dir'] = '/home/#{node[:gns3][:gns3_user]}/GNS3'
-node['gsn3']['config_dir'] = '/home/#{node[:gns3][:gns3_user]}/.config/GNS3'
-node['gns3']['projects_dir'] = '#{node[:gns3][:data_dir]}/projects'
-node['gns3']['images_dir'] = '#{node[:gns3][:data_dir]}/images'
-node['gns3']['iou'] = true
-node['gns3']['virtualbox'] = false
-node['gns3']['qemu'] = true
-node['gns3']['vmware'] = false
+
+# Dynamips configuration
+node['gns3']['dynamips'] = {
+	'allocate_aux_console_ports' => false,
+	'mmap_support' => true,
+	'sparse_memory_support' => true,
+	'ghost_ios_support' => 'true',
+}
+
+# IOU configuration
+node['gns3']['iou']['license_check'] = true
+
+# Virtualbox configuration
+node['gns3']['virtualbox']['vbox_user'] = ''
+
+# VMware configuration
+node['gns3']['vmware'] = {
+	'host_type' => 'fusion',
+	'vmnet_start_range' => 2,
+	'vmnet_end_range' => 50
+}
+
+# QEMU configuration
+node['gns3']['qemu']['enable_kvm'] = true
+
