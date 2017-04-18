@@ -24,6 +24,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+# Select vm providers to install
+node['gns3']['vm_providers'] = %w(virtualbox, vmware, qemu, docker, iou)
 
 # Packages
 node['gns3']['packages'] = {
