@@ -27,22 +27,19 @@
 # http://docs.gns3.com/1f6uXq05vukccKdMCHhdki5MXFhV8vcwuGwiRvXMQvM0/
 
 node['gns3']['server']['version'] = '1.5.4'
+
 node['gns3']['server']['config_path'] = 'FILE:#{node[:gns3][:config_dir]}/gns3_server.conf'
-node['gns3']['server']['config'] = {
-	'host' => '127.0.0.1',
-	'port' => '3080',
-	'images_path' => '#{node[:gns3][:images_dir]}',
-	'projects_path' => '#{node[:gns3][:projects_dir]}',
-	'report_erros' => true,
-	'console_start_port_range' => 2001,
-	'console_end_port_range' => 5000,
-	'udp_start_port_range' => 10000,
-	'udp_end_port_range' => 20000,
-	'ubridge_path' => '',
-	'auth' => true,
-	'user' => 'bob',
-	'password' => 'alice'
-}
+node['gns3']['server']['host'] = '127.0.0.1'
+node['gns3']['server']['port'] = '3080'
+node['gns3']['server']['report_errors'] = true
+node['gns3']['server']['console_start_port_range'] = 2001
+node['gns3']['server']['console_end_port_range'] = 5000
+node['gns3']['server']['udp_start_port_range'] = 10000
+node['gns3']['server']['udp_end_port_range'] = 20000
+node['gns3']['server']['ubridge_path'] = '/usr/local/bin/ubridge'
+node['gns3']['server']['auth'] = true
+node['gns3']['server']['user'] = 'bob'
+node['gns3']['server']['password'] = 'alice'
 
 node['gns3']['server']['vpcs'] = {
 	'vpcs_path' => 'FILE:/usr/local/bin/vpcs'
