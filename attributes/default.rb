@@ -28,3 +28,7 @@ node['gns3']['data_dir'] = '/home/gns3/GNS3'
 node['gsn3']['config_dir'] = '/home/gns3/.config/GNS3'
 node['gns3']['projects_dir'] = '#{node[:gns3][:data_dir]}/projects'
 node['gns3']['images_dir'] = '#{node[:gns3][:data_dir]}/images'
+node['gns3']['iou'] = true
+node['gns3']['virtualbox'] = false
+node['gns3']['qemu'] = true
+node['gns3']['vmware'] = false
