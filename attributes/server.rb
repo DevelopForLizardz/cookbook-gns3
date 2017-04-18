@@ -43,6 +43,33 @@ node['gns3']['server']['config'] = {
 	'user' => 'bob',
 	'password' => 'alice'
 }
-node['gns3']['server']['vpcs']  ={
+
+node['gns3']['server']['vpcs'] = {
 	'vpcs_path' => 'FILE:/usr/local/bin/vpcs'
+}
+
+node['gns3']['server']['dynamips'] = {
+	'allocate_aux_console_ports' => false,
+	'mmap_support' => true,
+	'dynamips_path' => '/usr/local/bin/dynamips',
+	'sparse_memory_support' => true,
+	'ghost_ious_support' => true
+}
+
+node['gns3']['server']['iou'] = {
+	'iouyap_path' => '/usr/local/bin/iouyap',
+	'iourc_path' => '/home/gns3/.iourc',
+	'license_check' => true
+}
+
+node['gns3']['server']['virtualbox'] = {
+	'vboxmanage_path' => '/usr/local/bin/VBoxManage',
+	'vbox_user' => 'gns3'
+}
+
+node['gns3']['server']['vmware'] = {
+	'host_type' => 'fusion',
+	'vmnet_start_range' => 2,
+	'vmnet_end_range' => 50,
+	'vmrun_path' => '/usr/bin/vmrun'
 }
