@@ -70,3 +70,7 @@ node['gns3']['server']['vmware'] = {
 	'vmnet_end_range' => 50,
 	'vmrun_path' => '/usr/bin/vmrun'
 }
+
+node['gns3']['server']['qemu'] = {
+	'enable_kvm' => true
+}
