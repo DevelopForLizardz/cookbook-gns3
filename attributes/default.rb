@@ -24,6 +24,29 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+# Paths
+node['gns3']['paths'] = {
+	'gns3_dir' => '/home/gns3/GNS3',
+	'projects_dir' => '#{node[:gns3][:paths][:gns3_dir]}/projects',
+	'images_dir' => '#{node[:gns3][:paths][:gns3_dir]}/images',
+	'config_dir' => '/home/gns3/.config/GNS3',
+	'server_config' => 'FILE:#{node[:gns3][:paths][:config_dir]}/gns3_server.conf'
+}
+
+# Server configuration
+node['gns3']['server'] = {
+	'host' => '127.0.0.1',
+	'port' => '3080',
+	'report_errors' => true,
+	'console_start_port_range' => '2001',
+	'console_end_port_range' => '5000',
+	'udp_start_port_range' => '10000',
+	'udp_start_end_range' => '20000',
+	'ubridge_path' => '',
+	'auth' => true,
+	'user' => 'bob',
+	'password' => 'alice'
+}
 node['gns3']['gns3_user'] = 'gns3'
 node['gns3']['data_dir'] = '/home/#{node[:gns3][:gns3_user]}/GNS3'
 node['gsn3']['config_dir'] = '/home/#{node[:gns3][:gns3_user]}/.config/GNS3'
