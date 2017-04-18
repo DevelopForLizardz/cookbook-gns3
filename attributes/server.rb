@@ -58,7 +58,7 @@ node['gns3']['server']['dynamips'] = {
 
 node['gns3']['server']['iou'] = {
 	'iouyap_path' => '/usr/local/bin/iouyap',
-	'iourc_path' => '/home/gns3/.iourc',
+	'iourc_path' => '/home/#{node[:gns3][:gns3_user]}/.iourc',
 	'license_check' => true
 }
 
