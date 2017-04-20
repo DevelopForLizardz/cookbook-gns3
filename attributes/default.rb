@@ -45,7 +45,8 @@ node['gns3']['paths'] = {
 	'iouyap' => '/usr/local/bin/iouyap',
 	'iourc' => '/home/gns3/.iourc',
 	'vboxmanage' => '/usr/local/bin/VBoxManage',
-	'vmrun' => '/usr/bin/local/vmrun'
+	'vmrun' => '/usr/bin/local/vmrun',
+	'project_source' => '/home/GNS3/Documents/project.gns3project'
 }
 
 # Server configuration
@@ -60,7 +61,8 @@ node['gns3']['server'] = {
 	'ubridge_path' => '',
 	'auth' => true,
 	'user' => 'bob',
-	'password' => 'alice'
+	'password' => 'alice',
+	'as_service' => true
 }
 
 # Dynamips configuration
