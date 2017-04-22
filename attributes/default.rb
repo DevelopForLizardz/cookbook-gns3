@@ -46,6 +46,7 @@ node['gns3']['paths'] = {
 	'iourc' => '/home/gns3/.iourc',
 	'vboxmanage' => '/usr/local/bin/VBoxManage',
 	'vmrun' => '/usr/bin/local/vmrun',
+	'ubridge' => '/usr/bin/brctl',
 	'project_source' => '/home/GNS3/Documents/project.gns3project'
 }
 
