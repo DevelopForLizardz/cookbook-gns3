@@ -25,7 +25,7 @@
 # THE SOFTWARE.
 
 # Select vm providers to install
-node['gns3']['vm_providers'] = %w(virtualbox, vmware, qemu, docker, iou)
+node['gns3']['hypervisors'] = %w(virtualbox, vmware, qemu, docker, iou)
 
 # Packages
 node['gns3']['packages'] = {

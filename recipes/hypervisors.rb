@@ -1,6 +1,6 @@
 #
 # Cookbook:: gns3
-# Recipe:: providers
+# Recipe:: hypervisors
 #
 # The MIT License (MIT)
 #
