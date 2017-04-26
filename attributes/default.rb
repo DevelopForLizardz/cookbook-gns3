@@ -25,21 +25,21 @@
 # THE SOFTWARE.
 
 # Select vm providers to install
-node['gns3']['hypervisors'] = %w(virtualbox, vmware, qemu, docker, iou)
+default['gns3']['hypervisors'] = %w(virtualbox, vmware, kvm, docker, iou)
 
 # Packages
-node['gns3']['packages'] = {
+default['gns3']['packages'] = {
 	'server' => %w(gns3_server),
 	'client' => %w(gns3_gui)
 }
 
 # Paths
-node['gns3']['paths'] = {
+default['gns3']['paths'] = {
 	'gns3_dir' => '/home/gns3/GNS3',
-	'projects_dir' => '#{node[:gns3][:paths][:gns3_dir]}/projects',
-	'images_dir' => '#{node[:gns3][:paths][:gns3_dir]}/images',
+	'projects_dir' => '#{default[:gns3][:paths][:gns3_dir]}/projects',
+	'images_dir' => '#{default[:gns3][:paths][:gns3_dir]}/images',
 	'config_dir' => '/home/gns3/.config/GNS3',
-	'server_config' => 'FILE:#{node[:gns3][:paths][:config_dir]}/gns3_server.conf',
+	'server_config' => 'FILE:#{default[:gns3][:paths][:config_dir]}/gns3_server.conf',
 	'vpcs' => '/usr/local/bin/vpcs',
 	'dynamips' => '/usr/local/bin/dynamips',
 	'iouyap' => '/usr/local/bin/iouyap',
@@ -51,7 +51,7 @@ node['gns3']['paths'] = {
 }
 
 # Server configuration
-node['gns3']['server'] = {
+default['gns3']['server'] = {
 	'host' => '127.0.0.1',
 	'port' => '3080',
 	'report_errors' => true,
@@ -67,7 +67,7 @@ node['gns3']['server'] = {
 }
 
 # Dynamips configuration
-node['gns3']['dynamips'] = {
+default['gns3']['dynamips'] = {
 	'allocate_aux_console_ports' => false,
 	'mmap_support' => true,
 	'sparse_memory_support' => true,
@@ -75,18 +75,18 @@ node['gns3']['dynamips'] = {
 }
 
 # IOU configuration
-node['gns3']['iou']['license_check'] = true
+default['gns3']['iou']['license_check'] = true
 
 # Virtualbox configuration
-node['gns3']['virtualbox']['vbox_user'] = ''
+default['gns3']['virtualbox']['vbox_user'] = ''
 
 # VMware configuration
-node['gns3']['vmware'] = {
+default['gns3']['vmware'] = {
 	'host_type' => 'fusion',
 	'vmnet_start_range' => 2,
 	'vmnet_end_range' => 50
 }
 
 # QEMU configuration
-node['gns3']['qemu']['enable_kvm'] = true
+default['gns3']['qemu']['enable_kvm'] = true
 

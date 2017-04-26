@@ -1,4 +1,4 @@
-name 'cookbook-gns3'
+name 'gns3'
 maintainer 'Ryan Drew'
 maintainer_email 'developforlizardz@gmail.com'
 license 'MIT'
@@ -18,3 +18,5 @@ chef_version '>= 12.1' if respond_to?(:chef_version)
 # a Supermarket.
 #
 # source_url 'https://github.com/<insert_org_here>/cookbook-gns3'
+
+depends 'kvm'

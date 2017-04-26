@@ -4,35 +4,14 @@ driver:
   use_sudo: false
 
 provisioner:
-  name: chef_zero
-  # You may wish to disable always updating cookbooks in CI or other testing environments.
-  # For example:
-  #   always_update_cookbooks: <%= !ENV['CI'] %>
-  always_update_cookbooks: true
+  name: chef_solo
 
-verifier:
-  name: inspec
-
-# arch configuration taken from: github.com/logankoester/chef-archlinux
 platforms:
-  - name: ubuntu-16.04
   - name: centos-7.3
-  - name: arch
-    driver_config:
-      image: logankoester/archlinux-chef
-      platform: arch
-      disable_upstart: true
-      require_chef_omnibus: false
-      provision_command:
-        - pacman -S --noconfirm --needed supervisor git
-        - rm /etc/gemrc
-      run_command: 'sh -c "/usr/sbin/sshd -o UseDNS=no -o UsePAM=no -o PasswordAuthentication=yes && /usr/sbin/supervisord -c /etc/supervisord.conf -n"'
+  - name: ubuntu-16.04
 
 suites:
-  - name: default
+  - name: hypervisors
     run_list:
-      - recipe[cookbook-gns3::default]
-    verifier:
-      inspec_tests:
-        - test/smoke/default
-    attributes:
+    - recipe[gns3::hypervisors]
+    attributes: { gns3: { hypervisors: array('kvm') } }
