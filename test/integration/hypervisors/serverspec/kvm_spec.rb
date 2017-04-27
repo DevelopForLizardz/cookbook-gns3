@@ -1,19 +1,31 @@
-# test/shared/spec_helper.rb is moved to /tmp/kitchen/data/spec_helper.rb
 require 'serverspec'
 
 set :backend, :exec
 
 describe 'KVM Installed' do
-	describe package('qemu-kvm') do
-		it { should be_installed }
-	end
+    # check for qemu/kvm
+    if ['debian', 'ubuntu', 'redhat'].include?(os[:family])
+        describe package('qemu-kvm')
+            it { should be_installed }
+        end
+    elsif os[:family] == 'arch'
+        describe package ('qemu')
+            it { should be_installed }
+    else
+        fail 'unsupported platform'
 
-	describe package('libvirt-bin'), :if => ['debian', 'ubuntu'].include?(os[:family]) do
-		it { should be_installed }
-	end
-
-	describe package('libvirt'), :if => os[:family] == 'redhat' do
-		it { should be_installed }
-	end
-
+    # check for libvirt
+    if ['debian', 'ubuntu'].include?(os[:family])
+        describe package('libvirt-bin')
+            it { should be_installed }
+        end
+    elsif ['redhat', 'arch'].include?(os[:family])
+        describe package('libvirt')
+            it { should be_installed }
+        end
+    else
+        fail 'unsupported platform'
+    end
 end
+
+

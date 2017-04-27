@@ -24,30 +24,44 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+# Set user
+defualt['gns3']['user'] = 'gns3'
+
 # Select vm providers to install
 default['gns3']['hypervisors'] = %w(virtualbox, vmware, kvm, docker, iou)
 
 # Packages
-default['gns3']['packages'] = {
-	'server' => %w(gns3_server),
-	'client' => %w(gns3_gui)
-}
+default['gns3']['packages']['server'] = %w(gns3_server)
+default['gns3']['packages']['client'] = %w(gns3_gui)
+case node['platform_family']
+when 'rhel'
+	# kvm
+	default['gns3']['packages']['kvm'] = %w(qemu-kvm libvirt)
+	# virtualbox
+	default['gns3']['packges']['virtualbox'] = %w(epel-release binutils gcc make patch libgomp glibc-headers glibc-devel kernel-headers kernel-devel dkms Virtualbox-5.1)
+when 'debian'
+	default['gns3']['packages']['kvm'] = %w(qemu-kvm libvirt-bin)
+	default['gns3']['packages']['virtualbox'] = %w(virtualbox)
+when 'arch'
+	default['gns3']['packages']['kvm'] = %w(qemu libvirt)
+	default['gns3']['packages']['virtualbox'] = %w(virtualbox virtualbox-host-modules-arch)
+end
 
 # Paths
 default['gns3']['paths'] = {
-	'gns3_dir' => '/home/gns3/GNS3',
+	'gns3_dir' => '/home/#{node[:gns3][:user]}/GNS3',
 	'projects_dir' => '#{default[:gns3][:paths][:gns3_dir]}/projects',
 	'images_dir' => '#{default[:gns3][:paths][:gns3_dir]}/images',
-	'config_dir' => '/home/gns3/.config/GNS3',
+	'config_dir' => '/home/#{node[:gns3][:user]}/.config/GNS3',
 	'server_config' => 'FILE:#{default[:gns3][:paths][:config_dir]}/gns3_server.conf',
 	'vpcs' => '/usr/local/bin/vpcs',
 	'dynamips' => '/usr/local/bin/dynamips',
 	'iouyap' => '/usr/local/bin/iouyap',
-	'iourc' => '/home/gns3/.iourc',
+	'iourc' => '/home/#{node[:gns3][:user]}/.iourc',
 	'vboxmanage' => '/usr/local/bin/VBoxManage',
 	'vmrun' => '/usr/bin/local/vmrun',
 	'ubridge' => '/usr/bin/brctl',
-	'project_source' => '/home/GNS3/Documents/project.gns3project'
+	'project_source' => '/home/#{node[:gns3][:user]}/Documents/project.gns3project'
 }
 
 # Server configuration

@@ -54,8 +54,10 @@ end
 
 # Instal Virtualbox if set
 if node['gns3']['hypervisors'].include?('virtualbox')
-	# Add VirtualBox repo for CentOS
-	if node['platform_family'] == 'rhel'
+	case node['platform_family']
+	when 'rhel'  
+		# https://www.if-not-true-then-false.com/2010/install-virtualbox-with-yum-on-fedora-centos-red-hat-rhel/
+		# add virtualbox repo
 		remote_file '/etc/yum.repos.d/virtualbox.repo' do
 			source 'http://download.virtualbox.org/virtualbox/rmp/rhel/virtualbox.repo'
 			owner 'root'
@@ -63,18 +65,32 @@ if node['gns3']['hypervisors'].include?('virtualbox')
 			mode '0644'
 			action :create
 		end
-	end
-		
-	# Install packages
-	node['gns3']['packages']['virtualbox'].each do |pkg|
-		package pkg do
-			action :install
-		end
-	end
 	
-	# Setup for CentOS
-	if node['platform_family'] == 'rhel'
-		if node['platform_version'].split('.').first == '7'
+		# install dependencies
+		# platform version returns x.y however we only need x
+		version = node[:platform_version].split(".").first
+		epel_path = '#{Chef::Config[:file_cache_path]}/epel-release-latests-#{version}.noarch.rmp
+		remote_file '#{epel_path}' do
+			source 'https://dl.fedoraproject.orb/pub/epel/epel-release-latest-#{version}.noarch.rmp'
+			action :create
+		end
+		['binutils', 'gcc', 'make', 'patch', 'libgomp', 'glibc-headers', 'glibc-devel','kernel-headers', 'kernel-devel', 'dkms'].each do |pkg|
+			rpm_package pkg do
+				source '#{epel_path}'
+				action :install
+			end
+		end
+
+		# include yum recipe to run 'yum update'
+		include_recipe 'yum'
+
+		# install virtualbox
+		package 'VirtualBox-5.1' do
+			action :install
+		end		
+		
+		# run setup
+		if version == '7'
 			vboxdrv_path = '/usr/lib/virtualbox/vboxdrv.sh'
 		else
 			vboxdrv_path = '/etc/init.d/vboxdrv'
@@ -83,12 +99,11 @@ if node['gns3']['hypervisors'].include?('virtualbox')
 			command 'sh #{vboxdrv_path} setup'
 		end
 
-		# Add gns3 user to virtualbox group
+		# add gns3 user to virtualbox group
 		group 'vboxusers' do
 			action :modify
 			members '#{node[:gns3][:user]}'
 			append true
 		end
-	end
-		
-end
+
+	when 'debian'
